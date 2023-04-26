@@ -42,7 +42,7 @@
                     Adicionar Cliente
                 </span>
                 @foreach ($errors->all() as $error)
-                    <li style="color:black; font-size: 0.8em">{{ $error }}</li>
+                    <li style="color:black; font-size: 0.8em;text-align:center;">{{ $error }}</li>
                 @endforeach
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz"
                     style="color:black;text-align:center;">

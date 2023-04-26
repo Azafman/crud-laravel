@@ -18,11 +18,14 @@
                     <img src="{{ asset('assets/images/img-01.png') }}" alt="IMG">
                 </div>
 
-                <form class="login100-form form" method="POST" action="{{route('index-login')}}">
+                <form class="login100-form form" method="POST" action="{{ route('index-login') }}">
                     @csrf
                     <span class="login100-form-title">
                         Login
                     </span>
+                    @foreach ($errors->all() as $error)
+                        <li style="color:black; font-size: 0.8em; text-align:center;">{{ $error }}</li>
+                    @endforeach
 
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                         <input class="input100" type="text" name="email" placeholder="E-mail">

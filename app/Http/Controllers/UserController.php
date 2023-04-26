@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller {
-    public function home() {
+    public function home(Request $r) {
         return view('home');
     }
     public function login() {
@@ -24,6 +24,12 @@ class UserController extends Controller {
         return view('register');
     }
     public function logando(Request $r) {
+        $r->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+        /* 
+        'email' => 'required|email|min:15|unique:users,email', */
         
         $requestData = $r->only(['email', 'password']);
 
@@ -31,13 +37,18 @@ class UserController extends Controller {
             return redirect(route('home'));
         }
 
-        return redirect(route('index'));
+        return redirect()->back()->withErrors([
+            'login-erro' => 'email e ou senha inválidos'
+        ]);
+        //neste caso, eu sou redirecionado para a última pagina, e na sessão atual será gerado um erro, que poderá ser utilizado conforme está na view, mas somente nesta sessão.
 
     }
     public function creating(Request $r) {
         $validatyOfData = $r->validate([
             'name' => 'required|min: 5',
-            'email' => 'required|email|min:15',
+            'email' => 'required|email|min:15|unique:users,email',/*lembrando que eu poderia fazer assim quando um if e esse e: back()->withErrors([
+                'login-erro' => 'email e ou senha inválidos'
+            ]); teria um erro na view e na mesma sessão da mesma forma. */
             'password' => 'required|min:6|confirmed'
         ]);
         $data = $r->only(['email','password', 'name']);
@@ -53,42 +64,4 @@ class UserController extends Controller {
         return redirect(route('index'));
     }
 
-
-
-
-    /* public function index()
-    {
-        return view('index');
-    }
-   
-    public function create()
-    {
-        return view('create');
-    }
-    
-    public function store(Request $request)
-    {
-        //
-        return redirect()->route('read-all');
-    }
-
-    public function show(string $id)
-    {
-        return view('index', ['users' => []]);
-    }
-
-    public function edit(string $id)
-    {
-        return view('edit');
-    }
-
-    public function update(Request $request, string $id)
-    {
-        return redirect()->route('show');
-    }
-
-    public function destroy(string $id)
-    {
-        return redirect()->route('read-all');
-    } */
 }

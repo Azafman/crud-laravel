@@ -58,6 +58,14 @@ class ClienteController extends Controller
         ]);
     }
     public function updating(Request $r) {
+        $r->validate([
+            'type' => 'required',
+            'doc_id' => 'numeric|min:11',
+            'name' => 'required|min:5',
+            'telefone' => 'required|min:9',
+            'responsavel' => 'required',
+            'address' => 'required'
+        ]);
         try {
             Cliente::where('id','=', $r['id'])->update([
                 'doc_id' => $r['doc_id'],

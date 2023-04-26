@@ -16,6 +16,11 @@ class EquipamentoController extends Controller
     }
     public function creating(Request $r)
     {
+        $r->validate([
+            'descricao' => 'required',
+            'model' => 'required|min:8',
+            'marca' => 'required|min:10',
+        ]);
 
         $data = $r->only(['descricao', 'modelo', 'marca']);
         $data['user_id'] = Auth::user()->id;
@@ -55,6 +60,11 @@ class EquipamentoController extends Controller
     }
     public function updating(Request $r)
     {
+        $r->validate([
+            'descricao' => 'required',
+            'modelo' => 'required|min:8',
+            'marca' => 'required|min:10',
+        ]);
         //dd($r['id']);
         try {
             Equipamento::where('id', '=', $r['id'])->update([

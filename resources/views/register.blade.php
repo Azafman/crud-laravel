@@ -29,7 +29,7 @@
                 <form class="login100-form validate-form" method="POST" action="{{ route('creating-user') }}">
 
                     @if ($errors->any()){{-- se tiver algum erro --}}
-                        <ul class="alert alert-error">
+                        <ul class="alert alert-error" style="text-align: center;">
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach

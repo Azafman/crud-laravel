@@ -18,7 +18,7 @@ class EquipamentoController extends Controller
     {
         $r->validate([
             'descricao' => 'required',
-            'model' => 'required|min:8',
+            'modelo' => 'required|min:8',
             'marca' => 'required|min:10',
         ]);
 

@@ -17,6 +17,9 @@
                 <span class="login100-form-title">
                     Adicionar Equipamento
                 </span>
+                @foreach ($errors->all() as $error)
+                    <li style="color:black; font-size: 0.8em;text-align:center;">{{ $error }}</li>
+                @endforeach
 
                 <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
                     <input class="input100" type="text" name="modelo" placeholder="Modelo">
